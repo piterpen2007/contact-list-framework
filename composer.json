@@ -28,8 +28,8 @@
   "require": {
     "php" : "^7.4 || ^8.0",
     "ext-json": "*",
-    "eff-tech/logger": "home_work_26-01-2022",
-    "eff-tech/view-template": "home_work_26-01-2022"
+    "eff-tech/logger": "dev-home_work_26-01-2022",
+    "eff-tech/view-template": "dev-home_work_26-01-2022"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
