@@ -35,17 +35,5 @@
   "prefer-stable": true,
   "require-dev": {
     "phpunit/phpunit": "9.*"
-  },
-  "repositories": [
-    {
-      "type": "git",
-      "url": "git@git.effective-team.ru:rnd/educational-projects/interns/2021-flow-1/fedyancev.d.a/view-template.git"
-    },
-    {
-      "type": "git",
-      "url": "git@git.effective-team.ru:rnd/educational-projects/interns/2021-flow-1/fedyancev.d.a/logger.git"
-    }
-
-  ]
-
+  }
 }
