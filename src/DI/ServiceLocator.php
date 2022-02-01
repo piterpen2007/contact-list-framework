@@ -1,6 +1,6 @@
 <?php
-namespace EfTech\ContactList\Infrastructure\DI;
 
+namespace EfTech\ContactList\Infrastructure\DI;
 
 use EfTech\ContactList\Infrastructure\Exception\RuntimeException;
 
@@ -33,6 +33,4 @@ class ServiceLocator implements ContainerInterface
         }
         return $this->instances[$serviceName];
     }
-
-
 }

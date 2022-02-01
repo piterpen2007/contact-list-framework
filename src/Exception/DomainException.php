@@ -7,5 +7,4 @@ namespace EfTech\ContactList\Infrastructure\Exception;
  */
 class DomainException extends \DomainException implements ExceptionInterface
 {
-
 }

@@ -2,7 +2,6 @@
 
 namespace EfTech\ContactList\Infrastructure\View;
 
-
 use EfTech\ContactList\Infrastructure\http\httpResponse;
 use EfTech\ContactList\Infrastructure\View\RenderInterface;
 
@@ -11,7 +10,6 @@ use EfTech\ContactList\Infrastructure\View\RenderInterface;
  */
 final class NullRender implements RenderInterface
 {
-
     public function render(httpResponse $httpResponse): void
     {
         // TODO: Implement render() method.

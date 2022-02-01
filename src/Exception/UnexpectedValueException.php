@@ -1,6 +1,7 @@
 <?php
 
 namespace EfTech\ContactList\Infrastructure\Exception;
+
 /**
  * Выбрасывается исключение если значение не совпадает с набором значений,
  * Обычно это происходит когда функция вызыввает функцию
@@ -8,5 +9,4 @@ namespace EfTech\ContactList\Infrastructure\Exception;
  */
 class UnexpectedValueException extends \UnexpectedValueException implements ExceptionInterface
 {
-
 }

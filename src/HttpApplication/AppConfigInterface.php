@@ -11,5 +11,4 @@ interface AppConfigInterface
      * @return bool
      */
     public function isHideErrorMsg(): bool;
-
 }

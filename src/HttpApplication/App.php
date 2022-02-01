@@ -1,6 +1,7 @@
 <?php
 
 namespace EfTech\ContactList\Infrastructure\HttpApplication;
+
 use EfTech\ContactList\Config\AppConfig;
 use EfTech\ContactList\Infrastructure\DI\ContainerInterface;
 use EfTech\ContactList\Infrastructure\Router\RouterInterface;
@@ -11,6 +12,7 @@ use EfTech\ContactList\Infrastructure\http\ServerResponseFactory;
 use EfTech\ContactList\Infrastructure\Logger\LoggerInterface;
 use Throwable;
 use EfTech\ContactList\Infrastructure\Exception;
+
 /**
  * Ядро приложения
  */
@@ -165,7 +167,6 @@ final class App
             $logger->info('Url request received' . $urlPath);
             $dispatcher = $this->getRouter()->getDispatcher($serverRequest);
             if (is_callable($dispatcher)) {
-
                 $httpResponse = $dispatcher($serverRequest);
 
                 if (!($httpResponse instanceof httpResponse)) {
@@ -215,15 +216,11 @@ final class App
     /** Тихое логгирование - если отправка данных пользователю закончилось ошибкой, то это никак не влияет
      * @param string $msg - сообщение в логи
      */
-    private function silentLog(string $msg):void
+    private function silentLog(string $msg): void
     {
         try {
             $this->logger->error($msg);
         } catch (Throwable $e) {
-
         }
     }
-
 }
-
-

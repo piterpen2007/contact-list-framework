@@ -1,6 +1,7 @@
 <?php
 
 namespace EfTech\ContactList\Infrastructure\Uri\Exception;
+
 use EfTech\ContactList\Infrastructure\Exception\RuntimeException;
 
 /**
@@ -8,5 +9,4 @@ use EfTech\ContactList\Infrastructure\Exception\RuntimeException;
  */
 class ErrorUrlException extends RuntimeException
 {
-
 }

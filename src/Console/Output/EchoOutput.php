@@ -7,7 +7,6 @@ namespace EfTech\ContactList\Infrastructure\Console\Output;
  */
 final class EchoOutput implements OutputInterface
 {
-
     /**
      * @inheritDoc
      */

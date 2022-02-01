@@ -5,7 +5,6 @@ namespace EfTech\ContactList\Infrastructure\View;
 use EfTech\ContactList\Infrastructure\http\httpResponse;
 use EfTech\ContactList\Infrastructure\View\RenderInterface;
 
-
 /** Логика отображения ответа пользователя по умолчанию
 *
 */
