@@ -1,6 +1,6 @@
 <?php
 
-namespace EfTech\FrameworkTest\Infrastrucrute\Uri;
+namespace EfTech\FrameworkTest\Infrastructure\Uri;
 
 use EfTech\ContactList\Infrastructure\Uri\Uri;
 use PHPUnit\Framework\TestCase;

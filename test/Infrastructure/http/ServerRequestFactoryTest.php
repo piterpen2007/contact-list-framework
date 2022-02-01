@@ -1,6 +1,6 @@
 <?php
 
-namespace EfTech\FrameworkTest\Infrastrucrute\http;
+namespace EfTech\FrameworkTest\Infrastructure\http;
 
 use EfTech\ContactList\Infrastructure\http\ServerRequestFactory;
 use PHPUnit\Framework\TestCase;

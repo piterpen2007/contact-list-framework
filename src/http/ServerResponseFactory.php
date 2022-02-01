@@ -30,12 +30,12 @@ class ServerResponseFactory
     public static function createJsonResponse(int $code, $data): httpResponse
     {
         try {
-            $body = json_encode($data, JSON_THROW_ON_ERROR);
+            $body = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
             if (false === array_key_exists($code, self::PHRASES)) {
                 throw new RuntimeException('Некорректный код ответа');
             }
 
-            $phrases = '';
+            $phrases = self::PHRASES[$code];
         } catch (Throwable $e) {
             $body = '{"status": "fail", "message": "response coding error"}';
             $code = 520;
@@ -53,7 +53,7 @@ class ServerResponseFactory
             }
             $phrases = self::PHRASES[$code];
         } catch (Throwable $e) {
-            $html = '<h1>Unknown Error</h1>>';
+            $html = '<h1>Unknown Error</h1>';
             $code = 520;
             $phrases = 'Unknown Error';
         }
@@ -73,7 +73,7 @@ class ServerResponseFactory
             $body = '';
             $headers = ['Location' => (string)$uri];
         } catch (Throwable $e) {
-            $body = '<h1>Unknown Error</h1>>';
+            $body = '<h1>Unknown Error</h1>';
             $httpCode = 520;
             $phrases = 'Unknown Error';
             $headers = ['Content-Type' => 'text/html'];
