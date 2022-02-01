@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4057436530b5071f1e79c371ee5065c1",
+    "content-hash": "81ae3fffb20c1495b3602dc9f6dc3c6a",
     "packages": [
         {
             "name": "eff-tech/logger",
@@ -12,14 +12,15 @@
             "source": {
                 "type": "git",
                 "url": "git@git.effective-team.ru:rnd/educational-projects/interns/2021-flow-1/fedyancev.d.a/logger.git",
-                "reference": "03ca54a9dd41bcb313f2b7afcf3ba735b5fa0573"
+                "reference": "125d6652f04eb83b29d6450710e84012438fb57c"
             },
             "require": {
                 "ext-json": "*",
                 "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "9.*"
+                "phpunit/phpunit": "9.*",
+                "squizlabs/php_codesniffer": "^3.6"
             },
             "type": "library",
             "autoload": {
@@ -47,7 +48,7 @@
             "support": {
                 "email": "popkin@yandex.ru"
             },
-            "time": "2022-01-26T04:32:42+00:00"
+            "time": "2022-02-01T06:18:13+00:00"
         },
         {
             "name": "eff-tech/view-template",
@@ -55,14 +56,15 @@
             "source": {
                 "type": "git",
                 "url": "git@git.effective-team.ru:rnd/educational-projects/interns/2021-flow-1/fedyancev.d.a/view-template.git",
-                "reference": "8dff4c89c904ac9c1aac8931087c11557dd1f118"
+                "reference": "9cf2872b993265c7111b19b37ecf127c4a940de9"
             },
             "require": {
                 "ext-json": "*",
                 "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "9.*"
+                "phpunit/phpunit": "9.*",
+                "squizlabs/php_codesniffer": "^3.6"
             },
             "type": "library",
             "autoload": {
@@ -90,7 +92,7 @@
             "support": {
                 "email": "popkin@yandex.ru"
             },
-            "time": "2022-01-26T04:33:23+00:00"
+            "time": "2022-02-01T06:18:13+00:00"
         }
     ],
     "packages-dev": [
@@ -1996,6 +1998,62 @@
                 }
             ],
             "time": "2020-09-28T06:39:44+00:00"
+        },
+        {
+            "name": "squizlabs/php_codesniffer",
+            "version": "3.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
+                "reference": "5e4e71592f69da17871dba6e80dd51bce74a351a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/5e4e71592f69da17871dba6e80dd51bce74a351a",
+                "reference": "5e4e71592f69da17871dba6e80dd51bce74a351a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-simplexml": "*",
+                "ext-tokenizer": "*",
+                "ext-xmlwriter": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
+            },
+            "bin": [
+                "bin/phpcs",
+                "bin/phpcbf"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Greg Sherwood",
+                    "role": "lead"
+                }
+            ],
+            "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
+            "homepage": "https://github.com/squizlabs/PHP_CodeSniffer",
+            "keywords": [
+                "phpcs",
+                "standards"
+            ],
+            "support": {
+                "issues": "https://github.com/squizlabs/PHP_CodeSniffer/issues",
+                "source": "https://github.com/squizlabs/PHP_CodeSniffer",
+                "wiki": "https://github.com/squizlabs/PHP_CodeSniffer/wiki"
+            },
+            "time": "2021-12-12T21:44:58+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
