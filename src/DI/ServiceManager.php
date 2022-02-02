@@ -31,6 +31,15 @@ class ServiceManager implements ContainerInterface
         $this->registerFactories(...$factories);
     }
 
+    /**
+     * @param string $id
+     * @return bool
+     */
+    public function has(string $id): bool
+    {
+        return array_key_exists($id, $this->instances) || array_key_exists($id, $this->factories);
+    }
+
     private function registerFactories(callable ...$factories): void
     {
         $this->factories = $factories;

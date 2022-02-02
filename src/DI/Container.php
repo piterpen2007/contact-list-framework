@@ -35,6 +35,16 @@ final class Container implements ContainerInterface
         $this->services = $services;
         $this->factories = $factories;
     }
+    /**
+     * @param string $id
+     * @return bool
+     */
+    public function has(string $id): bool
+    {
+        return array_key_exists($id, $this->instances)
+            || array_key_exists($id, $this->services)
+            || array_key_exists($id, $this->factories);
+    }
 
     /**
      * @inheritDoc
