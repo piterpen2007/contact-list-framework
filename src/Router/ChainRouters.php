@@ -3,6 +3,7 @@
 namespace EfTech\ContactList\Infrastructure\Router;
 
 use EfTech\ContactList\Infrastructure\http\ServerRequest;
+use Psr\Http\Message\ServerRequestInterface;
 
 class ChainRouters implements RouterInterface
 {
@@ -23,7 +24,7 @@ class ChainRouters implements RouterInterface
     /**
      * @inheritDoc
      */
-    public function getDispatcher(ServerRequest $serverRequest): ?callable
+    public function getDispatcher(ServerRequestInterface &$serverRequest): ?callable
     {
         $dispatcher = null;
         foreach ($this->routers as $router) {

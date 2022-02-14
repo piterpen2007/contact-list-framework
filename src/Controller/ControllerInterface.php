@@ -2,8 +2,8 @@
 
 namespace EfTech\ContactList\Infrastructure\Controller;
 
-use EfTech\ContactList\Infrastructure\http\httpResponse;
-use EfTech\ContactList\Infrastructure\http\ServerRequest;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Интерфейс контроллера
@@ -11,8 +11,8 @@ use EfTech\ContactList\Infrastructure\http\ServerRequest;
 interface ControllerInterface
 {
     /** Обработка http запроса
-     * @param ServerRequest $request
-     * @return httpResponse
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
      */
-    public function __invoke(ServerRequest $request): httpResponse;
+    public function __invoke(ServerRequestInterface $request): ResponseInterface;
 }

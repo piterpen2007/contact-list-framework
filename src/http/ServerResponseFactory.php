@@ -2,12 +2,35 @@
 
 namespace EfTech\ContactList\Infrastructure\http;
 
-use EfTech\ContactList\Infrastructure\Uri\Uri;
 use EfTech\ContactList\Infrastructure\Exception\RuntimeException;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Message\UriInterface;
 use Throwable;
 
 class ServerResponseFactory
 {
+    /** Фабрика задающия psr 7 http ответы
+     * @var ResponseFactoryInterface
+     */
+    private ResponseFactoryInterface $responseFactory;
+    /** Фабрика создания объекта ответа по psr  7
+     * @var StreamFactoryInterface
+     */
+    private StreamFactoryInterface $streamFactory;
+
+    /**
+     * @param ResponseFactoryInterface $responseFactory
+     * @param StreamFactoryInterface $streamFactory
+     */
+    public function __construct(
+        ResponseFactoryInterface $responseFactory,
+        \Psr\Http\Message\StreamFactoryInterface $streamFactory
+    ) {
+        $this->responseFactory = $responseFactory;
+        $this->streamFactory = $streamFactory;
+    }
     /**
      *  Расшифровка http кодов
      */
@@ -22,62 +45,58 @@ class ServerResponseFactory
         500 => 'Internal Server Error'
     ];
 
+    /**
+     * @param int $httpCode
+     * @param string $body
+     * @param $headers
+     * @return ResponseInterface
+     */
+    private function buildResponse(int $httpCode, string $body, $headers): ResponseInterface
+    {
+        $response = $this->responseFactory
+            ->createResponse($httpCode)
+            ->withBody($this->streamFactory->createStream($body));
+
+        foreach ($headers as $headerName => $headerValue) {
+            $response = $response->withHeader($headerName, $headerValue);
+        }
+        return $response;
+    }
+
     /** Создаёт http ответ с данными
      * @param int $code
-     * @param array $data
-     * @return httpResponse
+     * @param $data
+     * @return ResponseInterface
      */
-    public static function createJsonResponse(int $code, $data): httpResponse
+    public function createJsonResponse(int $code, $data): ResponseInterface
     {
         try {
-            $body = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
-            if (false === array_key_exists($code, self::PHRASES)) {
-                throw new RuntimeException('Некорректный код ответа');
-            }
-
-            $phrases = self::PHRASES[$code];
+            $body = json_encode($data, JSON_THROW_ON_ERROR);
         } catch (Throwable $e) {
             $body = '{"status": "fail", "message": "response coding error"}';
             $code = 520;
-            $phrases = 'Unknown error';
         }
-        return new httpResponse('1.1', ['Content-Type' => 'application/json'], $body, $code, $phrases);
+
+        return $this->buildResponse($code, $body, ['Content-Type' => 'application/json']);
     }
 
-
-    public static function createHtmlResponse(int $code, string $html): httpResponse
+    public function createHtmlResponse(int $code, string $html): ResponseInterface
     {
-        try {
-            if (false === array_key_exists($code, self::PHRASES)) {
-                throw new RuntimeException('Некорректный код ответа');
-            }
-            $phrases = self::PHRASES[$code];
-        } catch (Throwable $e) {
-            $html = '<h1>Unknown Error</h1>';
-            $code = 520;
-            $phrases = 'Unknown Error';
-        }
-        return new httpResponse('1.1', ['Content-Type' => 'text/html'], $html, $code, $phrases);
+        return $this->buildResponse($code, $html, ['Content-Type' => 'text/html']);
     }
-
-    public static function redirect(Uri $uri, int $httpCode = 302): httpResponse
+    public function redirect(UriInterface $uri, int $httpCode = 302): ResponseInterface
     {
         try {
             if (!($httpCode >= 300 && $httpCode < 400)) {
                 throw new RuntimeException('Некорректный код для редиректа');
             }
-            if (false === array_key_exists($httpCode, self::PHRASES)) {
-                throw new RuntimeException('Некорректный код ответа');
-            }
-            $phrases = self::PHRASES[$httpCode];
             $body = '';
             $headers = ['Location' => (string)$uri];
         } catch (Throwable $e) {
-            $body = '<h1>Unknown Error</h1>';
+            $body = '<h1>Unknown Error</h1>>';
             $httpCode = 520;
-            $phrases = 'Unknown Error';
             $headers = ['Content-Type' => 'text/html'];
         }
-        return new httpResponse('1.1', $headers, $body, $httpCode, $phrases);
+        return $this->buildResponse($httpCode, $body, $headers);
     }
 }

@@ -2,8 +2,7 @@
 
 namespace EfTech\ContactList\Infrastructure\View;
 
-use EfTech\ContactList\Infrastructure\http\httpResponse;
-use EfTech\ContactList\Infrastructure\View\RenderInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /** Логика отображения ответа пользователя по умолчанию
 *
@@ -11,13 +10,13 @@ use EfTech\ContactList\Infrastructure\View\RenderInterface;
 final class DefaultRender implements RenderInterface
 {
     /**
-     * @param httpResponse $httpResponse
+     * @param ResponseInterface $httpResponse $httpResponse
      * @return void
      */
-    public function render(httpResponse $httpResponse): void
+    public function render(ResponseInterface $httpResponse): void
     {
         foreach ($httpResponse->getHeaders() as $headerName => $headerValue) {
-            header("$headerName: $headerValue");
+            header("$headerName: {$httpResponse->getHeaderLine($headerName)}");
         }
         http_response_code($httpResponse->getStatusCode());
         echo $httpResponse->getBody();

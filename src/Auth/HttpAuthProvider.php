@@ -2,37 +2,41 @@
 
 namespace EfTech\ContactList\Infrastructure\Auth;
 
-use EfTech\ContactList\Infrastructure\http\httpResponse;
 use EfTech\ContactList\Infrastructure\http\ServerResponseFactory;
 use EfTech\ContactList\Infrastructure\Session\SessionInterface;
-use EfTech\ContactList\Infrastructure\Uri\Uri;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\UriInterface;
 
 /**
  * Поставщик услуги аутификации
  */
 class HttpAuthProvider
 {
+    private ServerResponseFactory $serverResponseFactory;
     /**
      * Ключ по которому в сессии храниться id пользователя
      */
     private const USER_ID = 'user_id';
     private UserDataStorageInterface $userDataStorage;
     private SessionInterface $session;
-    private Uri $loginUri;
+    private UriInterface $loginUri;
 
     /**
      * @param UserDataStorageInterface $userDataStorage
      * @param SessionInterface $session
-     * @param Uri $loginUri
+     * @param UriInterface $loginUri
+     * @param ServerResponseFactory $serverResponseFactory
      */
     public function __construct(
         UserDataStorageInterface $userDataStorage,
         SessionInterface $session,
-        Uri $loginUri
+        UriInterface $loginUri,
+        ServerResponseFactory $serverResponseFactory
     ) {
         $this->userDataStorage = $userDataStorage;
         $this->session = $session;
         $this->loginUri = $loginUri;
+        $this->serverResponseFactory = $serverResponseFactory;
     }
 
     public function isAuth(): bool
@@ -50,16 +54,16 @@ class HttpAuthProvider
         }
         return $isAuth;
     }
-    private function getLoginUri(): Uri
+    private function getLoginUri(): UriInterface
     {
         return $this->loginUri;
     }
 
     /** Запускает процесс аутентификации
-     * @param Uri $successUri
-     * @return httpResponse
+     * @param UriInterface $successUri
+     * @return ResponseInterface
      */
-    public function doAuth(Uri $successUri): httpResponse
+    public function doAuth(UriInterface $successUri): ResponseInterface
     {
         $loginUri = $this->getLoginUri();
         $loginQueryStr = $loginUri->getQuery();
@@ -67,16 +71,9 @@ class HttpAuthProvider
         $loginQuery = [];
         parse_str($loginQueryStr, $loginQuery);
         $loginQuery['redirect'] = (string)$successUri;
-        $uri = new Uri(
-            $loginUri->getSchema(),
-            $loginUri->getHost(),
-            $loginUri->getPort(),
-            $loginUri->getPath(),
-            http_build_query($loginQuery),
-            $loginUri->getUserInfo(),
-            $loginUri->getFragment()
-        );
 
-        return ServerResponseFactory::redirect($uri);
+        $uri = $loginUri->withQuery(http_build_query($loginQuery));
+
+        return $this->serverResponseFactory->redirect($uri);
     }
 }
