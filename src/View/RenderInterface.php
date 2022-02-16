@@ -2,8 +2,6 @@
 
 namespace EfTech\ContactList\Infrastructure\View;
 
-use EfTech\ContactList\Infrastructure\http\httpResponse;
-use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /** Определяет поведение классов ответственных за рендеринг результатов

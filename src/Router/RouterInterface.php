@@ -2,7 +2,6 @@
 
 namespace EfTech\ContactList\Infrastructure\Router;
 
-use EfTech\ContactList\Infrastructure\http\ServerRequest;
 use Psr\Http\Message\ServerRequestInterface;
 
 interface RouterInterface

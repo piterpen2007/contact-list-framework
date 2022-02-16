@@ -3,7 +3,6 @@
 namespace EfTech\ContactList\Infrastructure\Router;
 
 use EfTech\ContactList\Infrastructure\Controller\ControllerInterface;
-use EfTech\ContactList\Infrastructure\http\ServerRequest;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
