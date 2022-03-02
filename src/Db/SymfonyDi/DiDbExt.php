@@ -1,6 +1,6 @@
 <?php
 
-namespace EfTech\BookLibrary\Infrastructure\Db\SymfonyDi;
+namespace EfTech\ContactList\Infrastructure\Db\SymfonyDi;
 
 use Exception;
 use Symfony\Component\Config\Definition\Processor;
