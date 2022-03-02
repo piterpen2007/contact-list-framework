@@ -7,7 +7,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class DiDbConfigurator implements ConfigurationInterface
 {
-
     /**
      * @inheritDoc
      */
@@ -18,7 +17,7 @@ class DiDbConfigurator implements ConfigurationInterface
         $treeBuilder->getRootNode()
             ->children()
                 ->arrayNode('connect')
-                    ->fixXmlConfig('option','options')
+                    ->fixXmlConfig('option', 'options')
                     ->children()
                         ->scalarNode('dbType')
                             ->isRequired()

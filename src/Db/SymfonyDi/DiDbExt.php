@@ -2,6 +2,7 @@
 
 namespace EfTech\BookLibrary\Infrastructure\Db\SymfonyDi;
 
+use Exception;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -22,6 +23,7 @@ class DiDbExt implements ExtensionInterface
 
     /**
      * @inheritDoc
+     * @throws Exception
      */
     public function load(array $configs, ContainerBuilder $container)
     {

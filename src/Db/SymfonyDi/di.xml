@@ -4,19 +4,19 @@
            xsi:schemaLocation = "http://symfony.com/schema/dic/services  http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
         <services>
-            <prototype namespace="EfTech\BookLibrary\Infrastructure\Db\"
+            <prototype namespace="EfTech\ContactList\Infrastructure\Db\"
                        resource="./../"
                        autowire="true"
             />
 
 
-            <service id="EfTech\BookLibrary\Infrastructure\Db\ConnectionInterface"
-                     alias="EfTech\BookLibrary\Infrastructure\Db\ConnectionPDO"
+            <service id="EfTech\ContactList\Infrastructure\Db\ConnectionInterface"
+                     alias="EfTech\ContactList\Infrastructure\Db\ConnectionPDO"
                      public="true"
             />
 
-            <service id="EfTech\BookLibrary\Infrastructure\Db\Config">
-                <factory class="EfTech\BookLibrary\Infrastructure\Db\Config" method="factory"/>
+            <service id="EfTech\ContactList\Infrastructure\Db\Config">
+                <factory class="EfTech\ContactList\Infrastructure\Db\Config" method="factory"/>
                 <argument key="$config" type="collection">
                     <argument key="dbType">%efftech.db.connect.dbType%</argument>
                     <argument key="user">%efftech.db.connect.user%</argument>
