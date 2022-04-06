@@ -52,6 +52,30 @@ class DiDbConfigurator implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+
+
+                ->arrayNode('orm')
+                    ->fixXmlConfig('path', 'paths')
+                    ->fixXmlConfig('eventSubscriber', 'eventSubscribers')
+                    ->children()
+                        ->arrayNode('paths')
+                            ->scalarPrototype()
+                            ->end()
+                        ->end()
+                        ->arrayNode('eventSubscribers')
+                            ->scalarPrototype()
+                            ->end()
+                        ->end()
+                    ->booleanNode('isDevMode')
+                        ->defaultFalse()
+                    ->end()
+                    ->scalarNode('proxyDir')
+                        ->defaultNull()
+                    ->end()
+                ->end()
+            ->end()
+
+
             ->end()
         ->end();
         return $treeBuilder;
